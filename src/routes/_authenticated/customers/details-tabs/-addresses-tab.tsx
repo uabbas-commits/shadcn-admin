@@ -47,11 +47,11 @@ export function CustomerAddressesTab() {
 
 function AddressCard({ address }: { address: CustomerAddress }) {
   return (
-    <Card className='rounded-sm border-0 bg-card shadow-none'>
+    <Card className='rounded-sm border-0 bg-transparent shadow-none'>
       <CardContent className='p-4'>
-        <div className='relative aspect-[16/7] w-full overflow-hidden rounded-sm bg-muted/30'>
+        <div className='relative aspect-[16/7] w-full overflow-hidden rounded-sm bg-transparent'>
           <MapPlaceholder className='absolute inset-0' />
-          <div className='absolute inset-0 bg-gradient-to-b from-transparent to-background/15' />
+          <div className='absolute inset-0 bg-gradient-to-b from-transparent to-transparent' />
           <div className='absolute left-1/2 top-1/2 flex size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-background/70 shadow-sm backdrop-blur'>
             <MapPin className='size-4 text-foreground/70' />
           </div>
@@ -69,7 +69,7 @@ function AddressCard({ address }: { address: CustomerAddress }) {
 
 function FieldBox({ label, value }: { label: string; value: string }) {
   return (
-    <div className='rounded-sm border border-sky-100/80 bg-background p-4 dark:border-border/60'>
+    <div className='rounded-sm border border-sky-100/80 p-4 dark:border-border/60'>
       <div className='text-sm font-medium text-foreground'>{value}</div>
       <div className='mt-2 text-xs font-medium text-muted-foreground'>{label}</div>
     </div>

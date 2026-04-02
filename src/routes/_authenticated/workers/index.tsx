@@ -25,89 +25,22 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
+import {
+  type WorkerState,
+  type WorkerStatus,
+  stateLabels,
+  stateBadgeClasses,
+  statusLabels,
+  statusBadgeClasses,
+  workers,
+} from '@/routes/_authenticated/workers/-workers-data'
 
 export const Route = createFileRoute('/_authenticated/workers/')({
   component: WorkersRoute,
 })
 
-type WorkerStatus = 'verified' | 'pending' | 'unverified'
-type WorkerState = 'active' | 'inactive' | 'blocked'
-
-export type Worker = {
-  pk: number
-  name: string
-  phone: string
-  status: WorkerStatus
-  violations: number
-  blocks: number
-  state: WorkerState
-  dateJoined: string
-}
-
-const workers: Worker[] = [
-  {
-    pk: 181,
-    name: 'Shehab Eldin ghazy',
-    phone: '+965902020',
-    status: 'verified',
-    violations: 2,
-    blocks: 0,
-    state: 'active',
-    dateJoined: 'March 13, 2026, 3:57 a.m.',
-  },
-  {
-    pk: 127,
-    name: 'Milton Sheikh',
-    phone: '+965902020',
-    status: 'pending',
-    violations: 6,
-    blocks: 1,
-    state: 'inactive',
-    dateJoined: 'March 13, 2026, 3:57 a.m.',
-  },
-  {
-    pk: 328,
-    name: 'Forhad',
-    phone: '+965902020',
-    status: 'unverified',
-    violations: 1,
-    blocks: 2,
-    state: 'blocked',
-    dateJoined: 'March 13, 2026, 3:57 a.m.',
-  },
-]
-
-const statusLabels: Record<WorkerStatus, string> = {
-  verified: 'Verified',
-  pending: 'Pending',
-  unverified: 'Unverified',
-}
-
-const statusBadgeClasses: Record<WorkerStatus, string> = {
-  verified:
-    'rounded-full border-0 bg-emerald-100 px-2.5 py-0.5 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-200',
-  pending:
-    'rounded-full border-0 bg-amber-100 px-2.5 py-0.5 text-amber-700 dark:bg-amber-500/20 dark:text-amber-200',
-  unverified:
-    'rounded-full border-0 bg-slate-100 px-2.5 py-0.5 text-slate-600 dark:bg-slate-500/20 dark:text-slate-200',
-}
-
-const stateLabels: Record<WorkerState, string> = {
-  active: 'Active',
-  inactive: 'Inactive',
-  blocked: 'Blocked',
-}
-
-const stateBadgeClasses: Record<WorkerState, string> = {
-  active:
-    'rounded-full border-0 bg-emerald-100 px-2.5 py-0.5 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-200',
-  inactive:
-    'rounded-full border-0 bg-slate-100 px-2.5 py-0.5 text-slate-600 dark:bg-slate-500/20 dark:text-slate-200',
-  blocked:
-    'rounded-full border-0 bg-red-100 px-2.5 py-0.5 text-red-700 dark:bg-red-500/20 dark:text-red-200',
-}
-
 function WorkersRoute() {
+  const navigate = Route.useNavigate()
   const [query, setQuery] = useState('')
   const [status, setStatus] = useState<WorkerStatus | 'all'>('all')
   const [state, setState] = useState<WorkerState | 'all'>('all')
@@ -141,6 +74,9 @@ function WorkersRoute() {
     return { activeWorkers, blockedWorkers, totalViolations }
   }, [])
 
+  const goToWorker = (pk: number) => {
+    void navigate({ to: '/workers/details', search: { pk } })
+  }
 
   return (
     <Page
@@ -218,22 +154,30 @@ function WorkersRoute() {
         </div>
 
         <div className='overflow-hidden rounded-none border'>
-          <Table className='[&_th]:h-10 [&_th]:px-4 [&_th]:text-sm [&_th]:font-medium [&_th]:text-muted-foreground [&_td]:px-4 [&_td]:py-2.5 [&_td]:text-sm'>
+          <Table className='[&_th]:h-10 [&_th]:px-4 [&_th]:text-sm [&_th]:font-medium [&_th]:text-foreground [&_td]:px-4 [&_td]:py-2.5 [&_td]:text-sm'>
             <TableHeader>
               <TableRow className='hover:bg-transparent data-[state=selected]:bg-transparent'>
-                <TableHead className='w-10 bg-card'>
-                  <Checkbox checked={false} aria-label='Select all' />
+                <TableHead className='w-24 bg-card px-2'>
+                  <div className='flex items-center gap-2'>
+                    <Checkbox checked={false} aria-label='Select all' />
+                    <span>PK</span>
+                  </div>
                 </TableHead>
-                <TableHead className='w-20 bg-card text-foreground'>PK</TableHead>
                 <TableHead className='min-w-[180px] bg-card border-s border-border/60'>
                   Name
                 </TableHead>
-                <TableHead className='w-32 bg-card border-s border-border/60'>Status</TableHead>
+                <TableHead className='w-32 bg-card border-s border-border/60'>
+                  Status
+                </TableHead>
                 <TableHead className='w-24 bg-card border-s border-border/60'>
                   Violations
                 </TableHead>
-                <TableHead className='w-24 bg-card border-s border-border/60'>Blocks</TableHead>
-                <TableHead className='w-28 bg-card border-s border-border/60'>State</TableHead>
+                <TableHead className='w-24 bg-card border-s border-border/60'>
+                  Blocks
+                </TableHead>
+                <TableHead className='w-28 bg-card border-s border-border/60'>
+                  State
+                </TableHead>
                 <TableHead className='min-w-[180px] bg-card border-s border-border/60'>
                   Date Joined
                 </TableHead>
@@ -242,12 +186,24 @@ function WorkersRoute() {
             <TableBody>
               {filtered.length > 0 ? (
                 filtered.map((w) => (
-                  <TableRow key={w.pk} className='hover:bg-transparent data-[state=selected]:bg-transparent'>
-                    <TableCell className='bg-card'>
-                      <Checkbox checked={false} aria-label={`Select worker ${w.pk}`} />
-                    </TableCell>
-                    <TableCell className='bg-card text-foreground font-medium text-base'>
-                      {w.pk}
+                  <TableRow
+                    key={w.pk}
+                    role='link'
+                    tabIndex={0}
+                    onClick={() => goToWorker(w.pk)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        goToWorker(w.pk)
+                      }
+                    }}
+                    className='cursor-pointer hover:bg-muted/40 data-[state=selected]:bg-transparent'
+                  >
+                    <TableCell className='bg-card px-2' onClick={(e) => e.stopPropagation()}>
+                      <div className='flex items-center gap-2'>
+                        <Checkbox checked={false} aria-label={`Select worker ${w.pk}`} />
+                        <span className='text-sm font-medium text-foreground'>{w.pk}</span>
+                      </div>
                     </TableCell>
                     <TableCell className='bg-card border-s border-border/60'>
                       <div className='flex items-center gap-1.5'>
@@ -263,9 +219,7 @@ function WorkersRoute() {
                         {statusLabels[w.status]}
                       </Badge>
                     </TableCell>
-                    <TableCell className='bg-card border-s border-border/60'>
-                      {w.violations}
-                    </TableCell>
+                    <TableCell className='bg-card border-s border-border/60'>{w.violations}</TableCell>
                     <TableCell className='bg-card border-s border-border/60'>{w.blocks}</TableCell>
                     <TableCell className='bg-card border-s border-border/60'>
                       <Badge
@@ -282,7 +236,7 @@ function WorkersRoute() {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={8} className='h-24 text-center'>
+                  <TableCell colSpan={7} className='h-24 text-center'>
                     No results.
                   </TableCell>
                 </TableRow>

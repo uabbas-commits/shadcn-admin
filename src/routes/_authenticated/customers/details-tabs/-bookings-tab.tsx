@@ -103,22 +103,26 @@ export function CustomerBookingsTab() {
     () => [
       {
         id: 'select',
-        header: () => <Checkbox checked={false} aria-label='Select all' />,
+        header: () => null,
         cell: () => (
-          <Checkbox checked={false} aria-label='Select booking' onClick={(e) => e.stopPropagation()} />
+          <Checkbox
+            checked={false}
+            aria-label='Select booking'
+            onClick={(e) => e.stopPropagation()}
+          />
         ),
-        meta: { thClassName: 'w-10', tdClassName: '' },
+        meta: { thClassName: 'w-10 pe-0', tdClassName: 'pe-0' },
         enableSorting: false,
       },
       {
         accessorKey: 'pk',
         header: ({ column }) => <DataTableColumnHeader column={column} title='Pk' />,
         cell: ({ row }) => (
-          <span className='text-base font-semibold text-foreground'>
+          <span className='text-sm font-normal text-foreground'>
             {row.getValue('pk')}
           </span>
         ),
-        meta: { thClassName: 'w-[72px] text-foreground' },
+        meta: { thClassName: 'w-16 ps-0 text-foreground', tdClassName: 'ps-0' },
         enableSorting: false,
       },
       {
@@ -309,7 +313,7 @@ export function CustomerBookingsTab() {
       </div>
 
       <div className='overflow-hidden rounded-none border'>
-        <Table className='[&_th]:h-10 [&_th]:px-4 [&_th]:text-sm [&_th]:font-semibold [&_th]:text-muted-foreground [&_td]:px-4 [&_td]:py-2.5 [&_td]:text-sm'>
+        <Table className='[&_th]:h-10 [&_th]:px-4 [&_th]:text-sm [&_th]:font-medium [&_th]:text-foreground [&_td]:px-4 [&_td]:py-2.5 [&_td]:text-sm [&_th:first-child]:pe-0 [&_td:first-child]:pe-0 [&_th:nth-child(2)]:ps-0 [&_td:nth-child(2)]:ps-0'>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className='hover:bg-transparent'>

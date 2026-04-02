@@ -64,6 +64,11 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
         { label: 'Booking details' },
       ],
       '/workers': [{ label: 'Home', to: '/' }, { label: 'Workers' }],
+      '/workers/details': [
+        { label: 'Home', to: '/' },
+        { label: 'Workers', to: '/workers' },
+        { label: 'Details' },
+      ],
       '/violations': [{ label: 'Home', to: '/' }, { label: 'Violations' }],
       '/blocks': [{ label: 'Home', to: '/' }, { label: 'Blocks' }],
       '/tasks': [{ label: 'Home', to: '/' }, { label: 'Tasks' }],

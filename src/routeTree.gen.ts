@@ -42,6 +42,7 @@ import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authentica
 import { Route as ClerkAuthenticatedUserManagementRouteImport } from './routes/clerk/_authenticated/user-management'
 import { Route as ClerkauthSignUpRouteImport } from './routes/clerk/(auth)/sign-up'
 import { Route as ClerkauthSignInRouteImport } from './routes/clerk/(auth)/sign-in'
+import { Route as AuthenticatedWorkersDetailsRouteImport } from './routes/_authenticated/workers/details'
 import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes/_authenticated/settings/notifications'
 import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
@@ -224,6 +225,12 @@ const ClerkauthSignInRoute = ClerkauthSignInRouteImport.update({
   path: '/sign-in',
   getParentRoute: () => ClerkauthRouteRoute,
 } as any)
+const AuthenticatedWorkersDetailsRoute =
+  AuthenticatedWorkersDetailsRouteImport.update({
+    id: '/workers/details',
+    path: '/workers/details',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSettingsNotificationsRoute =
   AuthenticatedSettingsNotificationsRouteImport.update({
     id: '/notifications',
@@ -288,6 +295,7 @@ export interface FileRoutesByFullPath {
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
+  '/workers/details': typeof AuthenticatedWorkersDetailsRoute
   '/clerk/sign-in': typeof ClerkauthSignInRoute
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
@@ -326,6 +334,7 @@ export interface FileRoutesByTo {
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
+  '/workers/details': typeof AuthenticatedWorkersDetailsRoute
   '/clerk/sign-in': typeof ClerkauthSignInRoute
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
@@ -369,6 +378,7 @@ export interface FileRoutesById {
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
+  '/_authenticated/workers/details': typeof AuthenticatedWorkersDetailsRoute
   '/clerk/(auth)/sign-in': typeof ClerkauthSignInRoute
   '/clerk/(auth)/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/_authenticated/user-management': typeof ClerkAuthenticatedUserManagementRoute
@@ -410,6 +420,7 @@ export interface FileRouteTypes {
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
+    | '/workers/details'
     | '/clerk/sign-in'
     | '/clerk/sign-up'
     | '/clerk/user-management'
@@ -448,6 +459,7 @@ export interface FileRouteTypes {
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
+    | '/workers/details'
     | '/clerk/sign-in'
     | '/clerk/sign-up'
     | '/clerk/user-management'
@@ -490,6 +502,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/appearance'
     | '/_authenticated/settings/display'
     | '/_authenticated/settings/notifications'
+    | '/_authenticated/workers/details'
     | '/clerk/(auth)/sign-in'
     | '/clerk/(auth)/sign-up'
     | '/clerk/_authenticated/user-management'
@@ -757,6 +770,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClerkauthSignInRouteImport
       parentRoute: typeof ClerkauthRouteRoute
     }
+    '/_authenticated/workers/details': {
+      id: '/_authenticated/workers/details'
+      path: '/workers/details'
+      fullPath: '/workers/details'
+      preLoaderRoute: typeof AuthenticatedWorkersDetailsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings/notifications': {
       id: '/_authenticated/settings/notifications'
       path: '/notifications'
@@ -838,6 +858,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedBookingsDetailsRoute: typeof AuthenticatedBookingsDetailsRoute
   AuthenticatedCustomersDetailsRoute: typeof AuthenticatedCustomersDetailsRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
+  AuthenticatedWorkersDetailsRoute: typeof AuthenticatedWorkersDetailsRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
   AuthenticatedBlocksIndexRoute: typeof AuthenticatedBlocksIndexRoute
   AuthenticatedCampaignsIndexRoute: typeof AuthenticatedCampaignsIndexRoute
@@ -859,6 +880,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBookingsDetailsRoute: AuthenticatedBookingsDetailsRoute,
   AuthenticatedCustomersDetailsRoute: AuthenticatedCustomersDetailsRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
+  AuthenticatedWorkersDetailsRoute: AuthenticatedWorkersDetailsRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
   AuthenticatedBlocksIndexRoute: AuthenticatedBlocksIndexRoute,
   AuthenticatedCampaignsIndexRoute: AuthenticatedCampaignsIndexRoute,

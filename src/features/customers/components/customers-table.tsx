@@ -195,7 +195,7 @@ export function CustomersTable({ data, search, navigate }: CustomersTableProps) 
       </div>
 
       <div className='overflow-hidden rounded-none border'>
-        <Table className='[&_th]:h-10 [&_th]:px-4 [&_th]:text-sm [&_th]:font-medium [&_th]:text-muted-foreground [&_td]:px-4 [&_td]:py-2.5 [&_td]:text-sm'>
+        <Table className='[&_th]:h-10 [&_th]:px-4 [&_th]:text-sm [&_th]:font-medium [&_th]:text-foreground [&_td]:px-4 [&_td]:py-2.5 [&_td]:text-sm'>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className='hover:bg-transparent'>

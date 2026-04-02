@@ -35,7 +35,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import type { Worker } from './index'
+import type { Worker } from './-workers-data'
 
 const timeOptions = [
   '12:00 A.m',

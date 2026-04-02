@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/select'
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
-import { Check, ExternalLink, Folder } from 'lucide-react'
+import { Check, Expand, ExternalLink, Folder, X } from 'lucide-react'
 
 type BookingStatus = 'completed' | 'cancelled'
 
@@ -77,6 +77,7 @@ export function CustomerBookingDetailsSheet({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side='right'
+        overlayClassName='bg-transparent'
         className='sm:max-w-md overflow-hidden [&_[data-slot="sheet-close"]]:hidden'
       >
         <SheetTitle className='sr-only'>Booking details</SheetTitle>
@@ -86,6 +87,24 @@ export function CustomerBookingDetailsSheet({
         <div className='flex items-center justify-between border-b px-4 py-3'>
           <div className='min-w-0 flex-1 truncate text-sm font-medium text-muted-foreground'>
             Details
+          </div>
+          <div className='flex items-center gap-3'>
+            <button
+              type='button'
+              className='inline-flex size-9 items-center justify-center rounded-full border border-border/60 bg-background text-muted-foreground hover:text-foreground'
+              aria-label='Expand'
+              onClick={() => {}}
+            >
+              <Expand className='size-4' />
+            </button>
+            <button
+              type='button'
+              className='inline-flex size-9 items-center justify-center rounded-full border border-border/60 bg-background text-muted-foreground hover:text-foreground'
+              aria-label='Close'
+              onClick={() => onOpenChange(false)}
+            >
+              <X className='size-4' />
+            </button>
           </div>
         </div>
 
@@ -240,7 +259,7 @@ export function CustomerBookingDetailsSheet({
 
               <div className='flex items-center justify-between'>
                 <div className='text-sm font-medium text-muted-foreground'>Booking Photos</div>
-                <div className='flex size-10 flex-none items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-emerald-600'>
+                <div className='flex size-8 flex-none items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-emerald-600'>
                   <Check className='size-5' />
                 </div>
               </div>

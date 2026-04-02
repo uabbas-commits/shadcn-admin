@@ -32,7 +32,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import type { Worker } from './index'
+import type { Worker } from '@/routes/_authenticated/workers/-workers-data'
 
 const timeOptions = [
   '12:00 AM',
@@ -156,7 +156,7 @@ export function AddBlockDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className='gap-0 rounded-none p-0 sm:max-w-[520px]'>
+      <DialogContent className='gap-0 rounded-sm p-0 sm:max-w-[480px]'>
         <DialogHeader className='gap-1.5 border-b px-6 py-4'>
           <DialogTitle className='text-base font-medium'>Add Block</DialogTitle>
           <DialogDescription className='sr-only'>
@@ -177,7 +177,7 @@ export function AddBlockDialog({
                     </FormLabel>
                     <Select value={field.value} onValueChange={field.onChange}>
                       <FormControl>
-                        <SelectTrigger className='bg-card text-sm'>
+                        <SelectTrigger className='rounded-sm bg-background text-sm shadow-none'>
                           <SelectValue placeholder='Select worker' />
                         </SelectTrigger>
                       </FormControl>
@@ -204,7 +204,7 @@ export function AddBlockDialog({
                     </FormLabel>
                     <Select value={field.value} onValueChange={field.onChange}>
                       <FormControl>
-                        <SelectTrigger className='bg-card text-sm'>
+                        <SelectTrigger className='rounded-sm bg-background text-sm shadow-none'>
                           <SelectValue placeholder='Select reason' />
                         </SelectTrigger>
                       </FormControl>
@@ -230,7 +230,7 @@ export function AddBlockDialog({
                     </FormLabel>
                     <Select value={field.value} onValueChange={field.onChange}>
                       <FormControl>
-                        <SelectTrigger className='bg-card text-sm'>
+                        <SelectTrigger className='rounded-sm bg-background text-sm shadow-none'>
                           <SelectValue placeholder='Select status' />
                         </SelectTrigger>
                       </FormControl>
@@ -260,7 +260,7 @@ export function AddBlockDialog({
                               type='button'
                               variant='outline'
                               className={cn(
-                                'w-full justify-between bg-card text-sm font-normal',
+                                'h-9 w-full justify-between rounded-sm bg-background text-sm font-normal shadow-none',
                                 !field.value && 'text-muted-foreground'
                               )}
                             >
@@ -299,7 +299,7 @@ export function AddBlockDialog({
                               type='button'
                               variant='outline'
                               className={cn(
-                                'w-full justify-between bg-card text-sm font-normal',
+                                'h-9 w-full justify-between rounded-sm bg-background text-sm font-normal shadow-none',
                                 !field.value && 'text-muted-foreground'
                               )}
                             >
@@ -370,7 +370,7 @@ export function AddBlockDialog({
                         disabled={scheduleType !== 'custom_hours'}
                       >
                         <FormControl>
-                          <SelectTrigger className='bg-card text-sm'>
+                          <SelectTrigger className='rounded-sm bg-background text-sm shadow-none'>
                             <SelectValue placeholder='Select time' />
                           </SelectTrigger>
                         </FormControl>
@@ -401,7 +401,7 @@ export function AddBlockDialog({
                         disabled={scheduleType !== 'custom_hours'}
                       >
                         <FormControl>
-                          <SelectTrigger className='bg-card text-sm'>
+                          <SelectTrigger className='rounded-sm bg-background text-sm shadow-none'>
                             <SelectValue placeholder='Select time' />
                           </SelectTrigger>
                         </FormControl>
@@ -424,7 +424,7 @@ export function AddBlockDialog({
               <Button
                 type='button'
                 variant='outline'
-                className='h-10 flex-1 rounded-sm bg-card'
+                className='h-10 flex-1 rounded-sm bg-background shadow-none'
                 onClick={() => onOpenChange(false)}
               >
                 Cancel
